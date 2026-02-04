@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imcrypt | Secure Image Encryption CLI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0f0f1a 100%);
+            color: #e2e8f0;
+        }
+        .code-block {
+            background-color: #011627;
+            border-left: 4px solid #3b82f6;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans">
+
+    <nav class="p-6 flex justify-between items-center max-w-6xl mx-auto">
+        <div class="text-2xl font-bold tracking-tighter">
+            <span class="text-blue-500">IM</span>CRYPT
+        </div>
+        <div class="space-x-6">
+            <a href="https://github.com/theninza/imcrypt" class="hover:text-blue-400 transition"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://www.npmjs.com/package/imcrypt" class="hover:text-red-400 transition"><i class="fab fa-npm"></i> NPM</a>
+        </div>
+    </nav>
+
+    <header class="max-w-4xl mx-auto text-center py-20 px-4">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6">
+            Turn Images into <span class="gradient-text">Gibberish.</span>
+        </h1>
+        <p class="text-xl text-gray-400 mb-10">
+            A Node.js CLI to encrypt your PNG, JPG, and JPEG images. 
+            Take back complete control of your visual data.
+        </p>
+        
+        <div class="inline-flex items-center space-x-2 bg-black/40 p-4 rounded-lg border border-gray-700 font-mono text-sm md:text-lg">
+            <span class="text-green-400">$</span>
+            <span id="install-cmd">npm i -g imcrypt</span>
+            <button onclick="copyCmd()" class="ml-4 text-gray-500 hover:text-white"><i class="far fa-copy"></i></button>
+        </div>
+    </header>
+
+    <section class="max-w-6xl mx-auto py-12 px-4">
+        <div class="grid md:grid-cols-3 gap-8 items-center text-center">
+            <div class="p-6 bg-white/5 rounded-2xl border border-white/10 glow">
+                <i class="fas fa-image text-4xl text-blue-500 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Original</h3>
+                <p class="text-gray-500 text-sm">Your private memories or sensitive documents.</p>
+            </div>
+            
+            <div class="hidden md:block">
+                <i class="fas fa-arrow-right text-2xl text-gray-700"></i>
+                <div class="text-xs text-blue-400 mt-2 font-mono">imcrypt --encrypt</div>
+            </div>
+
+            <div class="p-6 bg-white/5 rounded-2xl border border-white/10 glow">
+                <div class="grid grid-cols-4 gap-1 mb-4 opacity-50">
+                    <div class="h-4 bg-red-500"></div><div class="h-4 bg-blue-500"></div><div class="h-4 bg-green-500"></div><div class="h-4 bg-yellow-500"></div>
+                    <div class="h-4 bg-purple-500"></div><div class="h-4 bg-pink-500"></div><div class="h-4 bg-orange-500"></div><div class="h-4 bg-indigo-500"></div>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Encrypted</h3>
+                <p class="text-gray-500 text-sm">Visual gibberish that preserves no details.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto py-16 px-4">
+        <h2 class="text-3xl font-bold mb-8 text-center">Platform Support</h2>
+        
+        
+
+        <div class="grid md:grid-cols-2 gap-6 mt-8">
+            <div class="bg-green-500/10 border border-green-500/20 p-6 rounded-xl">
+                <h4 class="text-green-400 font-bold mb-2"><i class="fas fa-check-circle"></i> PNG (Perfect)</h4>
+                <p class="text-sm text-gray-400">Lossless encryption. Decryption is bit-perfect, ensuring no data loss.</p>
+            </div>
+            <div class="bg-yellow-500/10 border border-yellow-500/20 p-6 rounded-xl">
+                <h4 class="text-yellow-400 font-bold mb-2"><i class="fas fa-exclamation-triangle"></i> JPG/JPEG (Lossy)</h4>
+                <p class="text-sm text-gray-400">Due to JPEG compression, minor pixel shifts may occur in the decrypted output.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto py-16 px-4 bg-black/20 rounded-3xl">
+        <h2 class="text-3xl font-bold mb-8 text-center">Quick Start</h2>
+        <div class="space-y-6 font-mono">
+            <div>
+                <p class="text-gray-500 mb-2"># Encrypting an image</p>
+                <div class="code-block p-4 rounded-lg overflow-x-auto">
+                    imcrypt -e secret.png -i locked.png -p key.txt
+                </div>
+            </div>
+            <div>
+                <p class="text-gray-500 mb-2"># Decrypting back</p>
+                <div class="code-block p-4 rounded-lg overflow-x-auto border-l-purple-500">
+                    imcrypt -d locked.png -k key.txt -i original.png
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 text-center text-gray-600 border-t border-white/5 mt-10">
+        <p>Built by <strong>theninza</strong></p>
+        <div class="mt-4 flex justify-center space-x-4">
+            <a href="#" class="hover:text-blue-500 transition">GitHub Repo</a>
+            <span>•</span>
+            <a href="#" class="hover:text-blue-500 transition">Documentation</a>
+        </div>
+    </footer>
+
+    <script>
+        function copyCmd() {
+            const cmd = document.getElementById('install-cmd').innerText;
+            navigator.clipboard.writeText(cmd);
+            alert("Command copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
